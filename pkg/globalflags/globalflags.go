@@ -1,4 +1,4 @@
-package app
+package globalflags
 
 import (
 	"flag"

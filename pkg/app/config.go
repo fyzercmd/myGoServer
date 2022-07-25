@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/fyzercmd/myGoServer/pkg/homedir"
 	"github.com/gosuri/uitable"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
@@ -38,7 +39,7 @@ func addConfigFlag(basename string, fs *pflag.FlagSet) {
 			viper.AddConfigPath(".")
 
 			if names := strings.Split(basename, "-"); len(names) > 1 {
-				viper.AddConfigPath(filepath.Join(HomeDir(), "."+names[0]))
+				viper.AddConfigPath(filepath.Join(homedir.HomeDir(), "."+names[0]))
 			}
 
 			viper.SetConfigName(basename)

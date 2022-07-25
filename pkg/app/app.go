@@ -6,6 +6,8 @@ import (
 
 	"github.com/fatih/color"
 	"github.com/fyzercmd/myGoServer/pkg/errors"
+	cliflag "github.com/fyzercmd/myGoServer/pkg/flag"
+	"github.com/fyzercmd/myGoServer/pkg/globalflags"
 	"github.com/fyzercmd/myGoServer/pkg/log"
 	"github.com/fyzercmd/myGoServer/pkg/version"
 	"github.com/fyzercmd/myGoServer/pkg/version/verflag"
@@ -166,7 +168,7 @@ func (a *App) buildCommand() {
 	cmd.SetOut(os.Stdout)
 	cmd.SetErr(os.Stderr)
 	cmd.Flags().SortFlags = true
-	InitFlags(cmd.Flags())
+	cliflag.InitFlags(cmd.Flags())
 
 	if len(a.commands) > 0 {
 		for _, command := range a.commands {
@@ -178,7 +180,7 @@ func (a *App) buildCommand() {
 		cmd.RunE = a.runCommand
 	}
 
-	var namedFlagSets NamedFlagSets
+	var namedFlagSets cliflag.NamedFlagSets
 	if a.options != nil {
 		namedFlagSets = a.options.Flags()
 		fs := cmd.Flags()
@@ -190,11 +192,11 @@ func (a *App) buildCommand() {
 		cols, _, _ := TerminalSize(cmd.OutOrStdout())
 		cmd.SetHelpFunc(func(cmd *cobra.Command, args []string) {
 			fmt.Fprintf(cmd.OutOrStdout(), "%s\n\n"+usageFmt, cmd.Long, cmd.UseLine())
-			PrintSections(cmd.OutOrStdout(), namedFlagSets, cols)
+			cliflag.PrintSections(cmd.OutOrStdout(), namedFlagSets, cols)
 		})
 		cmd.SetUsageFunc(func(cmd *cobra.Command) error {
 			fmt.Fprintf(cmd.OutOrStderr(), usageFmt, cmd.UseLine())
-			PrintSections(cmd.OutOrStderr(), namedFlagSets, cols)
+			cliflag.PrintSections(cmd.OutOrStderr(), namedFlagSets, cols)
 
 			return nil
 		})
@@ -206,7 +208,7 @@ func (a *App) buildCommand() {
 	if !a.noConfig {
 		addConfigFlag(a.basename, namedFlagSets.FlagSet("global"))
 	}
-	AddGlobalFlags(namedFlagSets.FlagSet("global"), cmd.Name())
+	globalflags.AddGlobalFlags(namedFlagSets.FlagSet("global"), cmd.Name())
 
 	a.cmd = &cmd
 }
@@ -226,7 +228,7 @@ func (a *App) Command() *cobra.Command {
 
 func (a *App) runCommand(cmd *cobra.Command, args []string) error {
 	printWorkingDir()
-	PrintFlags(cmd.Flags())
+	cliflag.PrintFlags(cmd.Flags())
 	if !a.noVersion {
 		verflag.PrintAndExitIfRequested()
 	}
