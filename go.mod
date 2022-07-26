@@ -17,6 +17,7 @@ require (
 	github.com/go-playground/validator/v10 v10.10.0 // indirect
 	github.com/go-sql-driver/mysql v1.6.0 // indirect
 	github.com/goccy/go-json v0.9.7 // indirect
+	github.com/golang-jwt/jwt/v4 v4.2.0 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/uuid v1.1.2 // indirect
 	github.com/hashicorp/golang-lru v0.5.4 // indirect
@@ -63,12 +64,18 @@ require (
 )
 
 require (
+	github.com/AlekSi/pointer v1.2.0
+	github.com/appleboy/gin-jwt/v2 v2.8.0
 	github.com/asaskevich/govalidator v0.0.0-20210307081110-f21760c49a8d
+	github.com/buger/jsonparser v1.1.1
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
+	github.com/dgrijalva/jwt-go/v4 v4.0.0-preview1
 	github.com/fatih/color v1.13.0
 	github.com/gin-contrib/cors v1.4.0
 	github.com/gin-contrib/pprof v1.4.0
 	github.com/gin-gonic/gin v1.8.1
+	github.com/go-redis/redis/v7 v7.4.1
+	github.com/golang/mock v1.6.0
 	github.com/gosuri/uitable v0.0.4
 	github.com/moby/term v0.0.0-20210619224110-3f7ff695adc6
 	github.com/novalagung/gubrak v1.0.0
