@@ -80,7 +80,7 @@ func NewConfig() *Config {
 		EnableProfiling: true,
 		EnableMetrics:   true,
 		Jwt: &JwtInfo{
-			Realm:      "iam jwt",
+			Realm:      "apiserver jwt",
 			Timeout:    1 * time.Hour,
 			MaxRefresh: 1 * time.Hour,
 		},
@@ -123,7 +123,7 @@ func LoadConfig(cfg string, defaultName string) {
 	} else {
 		viper.AddConfigPath(".")
 		viper.AddConfigPath(filepath.Join(homedir.HomeDir(), RecommendedHomeDir))
-		viper.AddConfigPath("/etc/iam")
+		viper.AddConfigPath("/etc/apiserver")
 		viper.SetConfigName(defaultName)
 	}
 
